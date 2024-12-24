@@ -50,13 +50,13 @@ const TaskDeleteButtons = ({
     return (
       <>
         <button
-          className="flex items-center justify-center rounded-[4px] shrink-0 size-6 hover:bg-white/5 hover:text-red-400"
+          className="flex items-center justify-center rounded-[4px] shrink-0 size-6 text-text/50 hover:bg-white/5 hover:text-red-400"
           onClick={onDelete}
         >
           <CheckIcon />
         </button>
         <button
-          className="flex items-center justify-center rounded-[4px] shrink-0 size-6 hover:bg-white/5 hover:text-blue"
+          className="flex items-center justify-center rounded-[4px] shrink-0 size-6 text-text/50 hover:bg-white/5 hover:text-white"
           onClick={() => setShowDeletePrompt(false)}
         >
           <CancelIcon />
@@ -67,7 +67,7 @@ const TaskDeleteButtons = ({
 
   return (
     <button
-      className="flex items-center justify-center rounded-[4px] shrink-0 size-6 hover:bg-white/5 hover:text-red-400"
+      className="flex items-center justify-center rounded-[4px] shrink-0 size-6 text-text/50 hover:bg-white/5 hover:text-red-400"
       onClick={handleShowDeletePrompt}
     >
       <TrashIcon />

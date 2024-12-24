@@ -5,7 +5,7 @@ interface TaskDeletePromptProps {
 const TaskDeletePrompt = ({ showDeletePrompt }: TaskDeletePromptProps) => {
   return (
     <div
-      className={`absolute left-0 top-0 flex items-center justify-center size-full z-20 backdrop-blur-md bg-white/10 transition-opacity p-4 pr-14 ${
+      className={`absolute left-0 top-0 flex items-center justify-center size-full z-20 bg-background transition-opacity p-4 pr-14 ${
         showDeletePrompt ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
     >

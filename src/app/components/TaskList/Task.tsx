@@ -86,13 +86,13 @@ const Task = ({ todo }: TaskProps) => {
         </div>
         <Link
           href={`/edit/${id}`}
-          className={`inline-flex items-center text-sm leading-5 break-words w-full transition-opacity min-w-0 duration-500 min-h-6 ${
+          className={`inline-flex items-center text-sm leading-5 break-words w-full transition-opacity min-w-0 duration-500 min-h-6 mr-8 ${
             completed ? "line-through opacity-50" : "opacity-100"
           }`}
         >
           <p className="min-w-0">{title}</p>
         </Link>
-        <div className="relative flex gap-2 z-30 ml-auto">
+        <div className="absolute right-0 mr-4 flex gap-2 z-30">
           <TaskDeleteButtons
             onDelete={handleDelete}
             showDeletePrompt={showDeletePrompt}
