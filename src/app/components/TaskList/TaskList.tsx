@@ -27,10 +27,10 @@ const EmptyState = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-4 border-t border-white/10 py-16 px-6">
       <Image src="/clipboard.svg" alt="Clipboard" width={56} height={56} />
-      <span className="text-foreground/50 font-bold">
-        You don't have any tasks registered yet.
+      <span className="opacity-50 font-bold">
+        You don&apos;t have any tasks registered yet.
       </span>
-      <span className="text-foreground/50">
+      <span className="opacity-50">
         Create tasks and organize your to-do items.
       </span>
     </div>
@@ -47,7 +47,7 @@ const Content = ({ tasks }: TaskListProps) => {
 
 const TaskList = ({ tasks = [] }: TaskListProps) => {
   const completedTasksCount = tasks.length
-    ? ` ${tasks.filter((task) => task.completed).length} of ${tasks.length}`
+    ? `${tasks.filter((task) => task.completed).length} of ${tasks.length}`
     : 0;
 
   return (

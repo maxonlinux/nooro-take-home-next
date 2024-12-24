@@ -5,10 +5,13 @@ const BASE_URL = process.env.BASE_URL;
 
 export default async function Home() {
   try {
-    const res = await fetch(`${BASE_URL}`);
+    const res = await fetch(`${BASE_URL}`, {
+      cache: "no-cache",
+    });
+
     const data = await res.json();
 
-    const tasks = data.data;
+    const tasks = data;
 
     if (!res.ok) {
       throw new Error("Something went wrong");
@@ -32,14 +35,7 @@ export default async function Home() {
     return (
       <div className="flex items-center justify-center mt-24">
         <div className="flex flex-col gap-4">
-          <h1>{err}</h1>
-          <Link
-            className="flex items-center gap-2 w-full py-4 text-blue"
-            href="/"
-          >
-            <span className="material-symbols-rounded text-xl">arrow_back</span>
-            Go home
-          </Link>
+          <h1>Error: {err}</h1>
         </div>
       </div>
     );

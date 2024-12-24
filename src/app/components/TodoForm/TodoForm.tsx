@@ -44,6 +44,13 @@ const TodoForm = ({ onSubmit, todo, setTodo, children }: TodoFormProps) => {
     }));
   };
 
+  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTodo((prev) => ({
+      ...prev,
+      title: e.target.value,
+    }));
+  };
+
   return (
     <form className="flex flex-col gap-12 mt-24" onSubmit={onSubmit}>
       <Link href="/">
@@ -54,15 +61,11 @@ const TodoForm = ({ onSubmit, todo, setTodo, children }: TodoFormProps) => {
           <input
             name="title"
             type="text"
-            value={todo.title}
-            onChange={(e) =>
-              setTodo((prev) => ({
-                ...prev,
-                title: e.target.value,
-              }))
-            }
             placeholder="Ex. Brush your teeth"
             className="appearance-none rounded-lg w-full p-4 bg-white/5 border border-white/10 placeholder:text-sm placeholder:opacity-50"
+            autoFocus
+            value={todo.title}
+            onChange={handleTitleChange}
           />
         </FieldWithLabel>
         <FieldWithLabel title="Color">

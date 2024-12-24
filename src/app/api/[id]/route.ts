@@ -1,17 +1,10 @@
 const BASE_URL = process.env.BASE_URL as string;
 
-export const PUT = async (
-  request: Request,
-  {
-    params,
-  }: {
-    params: {
-      id: string;
-    };
-  }
-) => {
+type Params = Promise<{ id: string }>;
+
+export const PUT = async (request: Request, { params }: { params: Params }) => {
   try {
-    const id = params.id;
+    const { id } = await params;
     const { title, color } = await request.json();
 
     if (!id) {
@@ -36,6 +29,7 @@ export const PUT = async (
     }
 
     const data = await res.json();
+
     return new Response(JSON.stringify(data));
   } catch (error) {
     console.error("Error updating todo:", error);
@@ -45,16 +39,10 @@ export const PUT = async (
 
 export const PATCH = async (
   request: Request,
-  {
-    params,
-  }: {
-    params: {
-      id: string;
-    };
-  }
+  { params }: { params: Params }
 ) => {
   try {
-    const id = params.id;
+    const { id } = await params;
     const { completed } = await request.json();
 
     if (!id) {
@@ -74,6 +62,7 @@ export const PATCH = async (
     }
 
     const data = await res.json();
+
     return new Response(JSON.stringify(data));
   } catch (error) {
     console.error("Error toggling todo:", error);
@@ -83,16 +72,10 @@ export const PATCH = async (
 
 export const DELETE = async (
   request: Request,
-  {
-    params,
-  }: {
-    params: {
-      id: string;
-    };
-  }
+  { params }: { params: Params }
 ) => {
   try {
-    const id = params.id;
+    const { id } = await params;
 
     if (!id) {
       return new Response("ID is required", { status: 400 });
@@ -103,10 +86,15 @@ export const DELETE = async (
     });
 
     if (!res.ok) {
+      console.log("Failed to delete todo", res);
       return new Response("Failed to delete todo", { status: res.status });
     }
 
-    return new Response(null);
+    const data = await res.json();
+
+    console.log("Deleted todo:", data);
+
+    return new Response(data);
   } catch (error) {
     console.error("Error deleting todo:", error);
     return new Response("Internal Server Error", { status: 500 });

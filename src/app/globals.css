@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 body {
-  @apply bg-background text-foreground;
+  @apply bg-background text-text;
   font-family: Inter, Arial, Helvetica, sans-serif;
 }
 

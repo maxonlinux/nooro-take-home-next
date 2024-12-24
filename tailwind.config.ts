@@ -11,10 +11,10 @@ export default {
       colors: {
         background: "#1A1A1A",
         header: "#0D0D0D",
-        foreground: "#F2F2F2",
+        text: "#F2F2F2",
         blue: "#4EA8DE",
-        "blue-dark": "#1E6F9F",
         purple: "#8284FA",
+        "blue-dark": "#1E6F9F",
         "purple-dark": "#5E60CE",
       },
     },

@@ -20,14 +20,17 @@ const ErrorState = ({ error }: { error: string }) => (
   </div>
 );
 
-const Page = async ({ params }: { params: Promise<{ slug: string }> }) => {
-  const id = (await params).slug;
-
+const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
   try {
-    const res = await fetch(`${BASE_URL}/${id}`);
+    const { id } = await params;
+
+    const res = await fetch(`${BASE_URL}/${id}`, {
+      cache: "no-cache",
+    });
+
     const data = await res.json();
 
-    const todo = data.data;
+    const todo = data;
 
     if (res.status === 404) {
       throw new Error("Todo not found");

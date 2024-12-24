@@ -1,6 +1,8 @@
+import { NextRequest } from "next/server";
+
 const BASE_URL = process.env.BASE_URL as string;
 
-export async function POST(request: Request): Promise<Response> {
+export async function POST(request: NextRequest): Promise<Response> {
   try {
     const body = await request.json();
     const { title, color } = body;
