@@ -3,7 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import TodoForm from "./TodoForm";
-import { FormTodo } from "@/types";
+import { BaseTodo } from "@/types";
 import TodoFormSubmitButton from "./TodoFormSubmitButton";
 
 const initialTodo = {
@@ -12,7 +12,7 @@ const initialTodo = {
 };
 
 const TodoFormCreate = () => {
-  const [todo, setTodo] = useState<FormTodo>(initialTodo);
+  const [todo, setTodo] = useState<BaseTodo>(initialTodo);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 

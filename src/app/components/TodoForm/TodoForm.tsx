@@ -1,6 +1,6 @@
 "use client";
 
-import { FormTodo } from "@/types";
+import { BaseTodo } from "@/types";
 import Link from "next/link";
 
 const colors = [
@@ -30,8 +30,8 @@ const FieldWithLabel = ({ title, children }: FieldWithLabelProps) => {
 };
 
 interface TodoFormProps {
-  todo: FormTodo;
-  setTodo: React.Dispatch<React.SetStateAction<FormTodo>>;
+  todo: BaseTodo;
+  setTodo: React.Dispatch<React.SetStateAction<BaseTodo>>;
   onSubmit: (e: React.FormEvent) => void;
   children: React.ReactNode;
 }

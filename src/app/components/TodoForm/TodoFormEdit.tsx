@@ -1,6 +1,6 @@
 "use client";
 
-import { FormTodo, Todo } from "@/types";
+import { BaseTodo, Todo } from "@/types";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import TodoForm from "./TodoForm";
@@ -11,7 +11,7 @@ type TodoFormEditProps = {
 };
 
 const TodoFormEdit = ({ initialTodo }: TodoFormEditProps) => {
-  const [todo, setTodo] = useState<FormTodo>(initialTodo);
+  const [todo, setTodo] = useState<BaseTodo>(initialTodo);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
