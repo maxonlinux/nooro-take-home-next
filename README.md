@@ -113,7 +113,7 @@ sudo nginx -t
 sudo systemctl restart nginx
 ```
 
-### 3. Place the Project on the Server (e.g. to `/home/user/frontend`) and Follow the Steps from Getting Started Section
+### 3. Clone the Repo to the Server and Follow the Steps from Getting Started Section
 
 Follow the steps in the Getting Started section to complete the setup.
 
