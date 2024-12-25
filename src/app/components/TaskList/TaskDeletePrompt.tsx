@@ -6,6 +6,11 @@ interface TaskDeletePromptProps {
   onDelete: () => Promise<void>;
 }
 
+interface TaskDeleteButtonsProps extends TaskDeletePromptProps {
+  showDeletePrompt: boolean;
+  setShowDeletePrompt: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
 const TrashIcon = () => {
   return (
     <svg
@@ -39,6 +44,40 @@ const CancelIcon = () => {
   return <span className="material-symbols-rounded text-xl">close</span>;
 };
 
+const TaskDeleteButtons = ({
+  showDeletePrompt,
+  setShowDeletePrompt,
+  onDelete,
+}: TaskDeleteButtonsProps) => {
+  if (showDeletePrompt) {
+    return (
+      <>
+        <button
+          className="flex items-center justify-center rounded-[4px] shrink-0 size-6 text-text/50 hover:bg-white/5 hover:text-red-400"
+          onClick={onDelete}
+        >
+          <CheckIcon />
+        </button>
+        <button
+          className="flex items-center justify-center rounded-[4px] shrink-0 size-6 text-text/50 hover:bg-white/5 hover:text-white"
+          onClick={() => setShowDeletePrompt(false)}
+        >
+          <CancelIcon />
+        </button>
+      </>
+    );
+  }
+
+  return (
+    <button
+      className="flex items-center justify-center rounded-[4px] shrink-0 size-6 text-text/50 hover:bg-white/5 hover:text-white"
+      onClick={() => setShowDeletePrompt(true)}
+    >
+      <TrashIcon />
+    </button>
+  );
+};
+
 const TaskDeletePrompt = ({ onDelete }: TaskDeletePromptProps) => {
   const [showDeletePrompt, setShowDeletePrompt] = useState(false);
 
@@ -54,20 +93,11 @@ const TaskDeletePrompt = ({ onDelete }: TaskDeletePromptProps) => {
         </span>
       </div>
       <div className="absolute flex gap-2 right-0 mr-4 z-30 pointer-events-auto">
-        {showDeletePrompt && (
-          <button
-            className="flex items-center justify-center rounded-[4px] shrink-0 size-6 text-text/50 hover:bg-white/5 hover:text-red-400"
-            onClick={onDelete}
-          >
-            <CheckIcon />
-          </button>
-        )}
-        <button
-          className="flex items-center justify-center rounded-[4px] shrink-0 size-6 text-text/50 hover:bg-white/5 hover:text-white"
-          onClick={() => setShowDeletePrompt((prev) => !prev)}
-        >
-          {showDeletePrompt ? <CancelIcon /> : <TrashIcon />}
-        </button>
+        <TaskDeleteButtons
+          showDeletePrompt={showDeletePrompt}
+          setShowDeletePrompt={setShowDeletePrompt}
+          onDelete={onDelete}
+        />
       </div>
     </div>
   );
