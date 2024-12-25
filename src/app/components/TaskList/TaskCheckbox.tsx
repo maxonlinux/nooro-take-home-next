@@ -3,8 +3,6 @@
 import { Checkbox } from "@headlessui/react";
 import resolveConfig from "tailwindcss/resolveConfig";
 import tailwindConfig from "../../../../tailwind.config";
-import { toggleTask } from "@/app/actions";
-import { useRef } from "react";
 
 const twFullConfig = resolveConfig(tailwindConfig);
 
