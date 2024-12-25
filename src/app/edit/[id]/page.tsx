@@ -1,6 +1,8 @@
 import Link from "next/link";
-import TodoFormEdit from "@/app/components/TodoForm/TodoFormEdit";
 import { Metadata } from "next";
+import { updateTask } from "@/app/actions";
+import TodoForm from "@/app/components/TodoForm/TodoForm";
+import TodoFormSubmitButton from "@/app/components/TodoForm/TodoFormSubmitButton";
 
 const BASE_URL = process.env.BASE_URL;
 
@@ -40,7 +42,13 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
       throw new Error("Something went wrong");
     }
 
-    return <TodoFormEdit initialTodo={todo} />;
+    const updateTaskWithId = updateTask.bind(null, id);
+
+    return (
+      <TodoForm todo={todo} action={updateTaskWithId}>
+        <TodoFormSubmitButton text="Save" icon="Done" />
+      </TodoForm>
+    );
   } catch (error) {
     const err = error instanceof Error ? error.message : "Something went wrong";
 

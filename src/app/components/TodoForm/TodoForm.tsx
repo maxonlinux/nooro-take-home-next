@@ -2,18 +2,8 @@
 
 import { BaseTodo } from "@/types";
 import Link from "next/link";
-
-const colors = [
-  "#cd4e2d",
-  "#d9942b",
-  "#e8c93b",
-  "#73b95b",
-  "#4d6cf4",
-  "#534ac7",
-  "#9151d1",
-  "#cc484a",
-  "#8c7a55",
-];
+import TodoFormColorPicker from "./TodoFormColorPicker";
+import { useActionState } from "react";
 
 interface FieldWithLabelProps {
   title: string;
@@ -30,29 +20,20 @@ const FieldWithLabel = ({ title, children }: FieldWithLabelProps) => {
 };
 
 interface TodoFormProps {
-  todo: BaseTodo;
-  setTodo: React.Dispatch<React.SetStateAction<BaseTodo>>;
-  onSubmit: (e: React.FormEvent) => void;
+  todo?: BaseTodo;
+  action: (prevState: any, formData: FormData) => Promise<any>;
   children: React.ReactNode;
 }
 
-const TodoForm = ({ onSubmit, todo, setTodo, children }: TodoFormProps) => {
-  const handleColorClick = (color: string) => {
-    setTodo((prev) => ({
-      ...prev,
-      color: prev.color === color ? "" : color,
-    }));
-  };
+const initialState = {
+  message: "",
+};
 
-  const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTodo((prev) => ({
-      ...prev,
-      title: e.target.value,
-    }));
-  };
+const TodoForm = ({ action, todo, children }: TodoFormProps) => {
+  const [state, formAction] = useActionState(action, initialState);
 
   return (
-    <form className="flex flex-col gap-12 mt-24" onSubmit={onSubmit}>
+    <form className="flex flex-col gap-12 mt-24" action={formAction}>
       <Link href="/">
         <span className="material-symbols-rounded">arrow_back</span>
       </Link>
@@ -64,27 +45,14 @@ const TodoForm = ({ onSubmit, todo, setTodo, children }: TodoFormProps) => {
             placeholder="Ex. Brush your teeth"
             className="appearance-none rounded-lg w-full p-4 bg-white/5 border border-white/10 placeholder:text-sm placeholder:opacity-50"
             autoFocus
-            value={todo.title}
-            onChange={handleTitleChange}
+            defaultValue={todo?.title}
           />
+          {state.message && (
+            <span className="text-red-500 text-sm">{state.message}</span>
+          )}
         </FieldWithLabel>
         <FieldWithLabel title="Color">
-          <div className="flex gap-4">
-            {colors.map((color, i) => (
-              <button
-                type="button"
-                key={i}
-                onClick={() => handleColorClick(color)}
-              >
-                <div
-                  className={`size-[52px] rounded-full border-2 ${
-                    color === todo.color ? "border-white" : "border-transparent"
-                  }`}
-                  style={{ background: color }}
-                />
-              </button>
-            ))}
-          </div>
+          <TodoFormColorPicker defaultValue={todo?.color} />
         </FieldWithLabel>
       </div>
       <div>{children}</div>

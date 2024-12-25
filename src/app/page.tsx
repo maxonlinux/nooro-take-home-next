@@ -7,6 +7,9 @@ export default async function Home() {
   try {
     const res = await fetch(`${BASE_URL}`, {
       cache: "no-cache",
+      next: {
+        tags: ["todos"],
+      },
     });
 
     const data = await res.json();

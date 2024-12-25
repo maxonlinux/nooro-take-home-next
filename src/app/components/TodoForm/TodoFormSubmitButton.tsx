@@ -1,15 +1,18 @@
-interface ContentProps {
-  loading: boolean;
+"use client";
+
+import { useFormStatus } from "react-dom";
+
+interface TodoFormSubmitButtonProps {
   text: string;
   icon: string;
 }
 
-type TodoFormSubmitButtonProps = ContentProps & {
-  disabled: boolean;
-};
+interface ContentProps extends TodoFormSubmitButtonProps {
+  pending: boolean;
+}
 
-const Content = ({ loading, text, icon }: ContentProps) => {
-  if (loading) {
+const Content = ({ text, icon, pending }: ContentProps) => {
+  if (pending) {
     return (
       <>
         <span className="material-symbols-rounded text-lg animate-spin">
@@ -28,19 +31,16 @@ const Content = ({ loading, text, icon }: ContentProps) => {
   );
 };
 
-const TodoFormSubmitButton = ({
-  text,
-  icon,
-  loading,
-  disabled,
-}: TodoFormSubmitButtonProps) => {
+const TodoFormSubmitButton = ({ text, icon }: TodoFormSubmitButtonProps) => {
+  const { pending } = useFormStatus();
+
   return (
     <button
       type="submit"
       className="flex items-center justify-center gap-2 w-full py-4 text-sm font-bold bg-blue-dark rounded-lg hover:bg-blue transition-colors duration-500 disabled:pointer-events-none disabled:opacity-50"
-      disabled={disabled}
+      disabled={pending}
     >
-      <Content loading={loading} text={text} icon={icon} />
+      <Content text={text} icon={icon} pending={pending} />
     </button>
   );
 };

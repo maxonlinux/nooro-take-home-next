@@ -4,7 +4,7 @@ export const requestHandler = async ({
   method,
   url,
   body,
-}: RequestHandlerParams): Promise<Response> => {
+}: RequestHandlerParams): Promise<any> => {
   try {
     const headers = { "Content-Type": "application/json" };
     const options: RequestInit = { method, headers };
@@ -16,15 +16,13 @@ export const requestHandler = async ({
     const res = await fetch(url, options);
 
     if (!res.ok) {
-      return new Response(`Failed to ${method} resource`, {
-        status: res.status,
-      });
+      return { error: `Failed to ${method} resource` };
     }
 
     const data = await res.json();
-    return new Response(JSON.stringify(data));
+    return data;
   } catch (error) {
     console.error(`Error in ${method} request:`, error);
-    return new Response("Internal Server Error", { status: 500 });
+    return { error: "Something went wrong" };
   }
 };
