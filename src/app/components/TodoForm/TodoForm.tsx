@@ -69,7 +69,7 @@ const TodoForm = ({ onSubmit, todo, setTodo, children }: TodoFormProps) => {
           />
         </FieldWithLabel>
         <FieldWithLabel title="Color">
-          <div className="flex gap-4">
+          <div className="flex flex-wrap gap-4">
             {colors.map((color, i) => (
               <button
                 type="button"
