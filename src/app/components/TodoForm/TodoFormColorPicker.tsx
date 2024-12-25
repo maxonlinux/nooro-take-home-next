@@ -26,7 +26,7 @@ export default function TodoFormColorPicker({
   };
 
   return (
-    <div className="flex gap-4">
+    <div className="flex flex-wrap gap-4">
       <input type="hidden" name="color" value={selectedColor} readOnly />
       {colors.map((color) => (
         <button

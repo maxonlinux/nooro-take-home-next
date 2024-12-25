@@ -6,12 +6,12 @@ import { redirect } from "next/navigation";
 
 const BASE_URL = process.env.BASE_URL as string;
 
-export async function createTask(_prevState: any, formData: FormData) {
+export async function createTask(_prevState: unknown, formData: FormData) {
   const title = formData.get("title") as string;
   const color = formData.get("color") as string;
 
   if (!title) {
-    return { message: "Title is required" };
+    return "Title is required";
   }
 
   const res = await requestHandler({
@@ -29,14 +29,14 @@ export async function createTask(_prevState: any, formData: FormData) {
 
 export async function updateTask(
   id: string,
-  _prevState: any,
+  _prevState: unknown,
   formData: FormData
 ) {
   const title = formData.get("title") as string;
   const color = formData.get("color") as string;
 
   if (!title) {
-    return { message: "Title is required" };
+    return "Title is required";
   }
 
   const res = await requestHandler({

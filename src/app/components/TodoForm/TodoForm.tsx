@@ -21,13 +21,11 @@ const FieldWithLabel = ({ title, children }: FieldWithLabelProps) => {
 
 interface TodoFormProps {
   todo?: BaseTodo;
-  action: (prevState: any, formData: FormData) => Promise<any>;
+  action: (prevState: unknown, formData: FormData) => Promise<string>;
   children: React.ReactNode;
 }
 
-const initialState = {
-  message: "",
-};
+const initialState = "";
 
 const TodoForm = ({ action, todo, children }: TodoFormProps) => {
   const [state, formAction] = useActionState(action, initialState);
@@ -47,9 +45,7 @@ const TodoForm = ({ action, todo, children }: TodoFormProps) => {
             autoFocus
             defaultValue={todo?.title}
           />
-          {state.message && (
-            <span className="text-red-500 text-sm">{state.message}</span>
-          )}
+          {state && <span className="text-red-500 text-sm">{state}</span>}
         </FieldWithLabel>
         <FieldWithLabel title="Color">
           <TodoFormColorPicker defaultValue={todo?.color} />
