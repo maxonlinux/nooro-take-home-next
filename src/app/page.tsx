@@ -6,7 +6,7 @@ const BASE_URL = process.env.BASE_URL;
 export default async function Home() {
   try {
     const res = await fetch(`${BASE_URL}`, {
-      cache: "no-cache",
+      cache: "no-store",
       next: {
         tags: ["todos"],
       },

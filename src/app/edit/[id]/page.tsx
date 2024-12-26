@@ -27,7 +27,7 @@ const Page = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
 
     const res = await fetch(`${BASE_URL}/${id}`, {
-      cache: "no-cache",
+      cache: "no-store",
     });
 
     const data = await res.json();
